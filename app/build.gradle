@@ -68,6 +68,9 @@ dependencies {
     implementation "com.github.bumptech.glide:glide:$glide_version"
     kapt "com.github.bumptech.glide:compiler:$glide_version"
 
+    /** Circle ImageView dependencies **/
+    implementation "de.hdodenhof:circleimageview:$circleIv_version"
+
     /** Test dependencies **/
     // junit
     testImplementation "junit:junit:$jUnit_version"

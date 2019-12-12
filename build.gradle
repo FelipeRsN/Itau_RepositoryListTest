@@ -25,6 +25,9 @@ buildscript {
     /** Image cache dependencies **/
     ext.glide_version = "4.10.0"
 
+    /** Circle ImageView versions **/
+    ext.circleIv_version = "3.0.0"
+
     /** Test Version **/
     ext.jUnit_version = "4.12"
     ext.mockitoKotlin_version = '2.0.0'
