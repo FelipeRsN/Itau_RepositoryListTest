@@ -33,7 +33,8 @@ android {
 
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
+            shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
@@ -55,6 +56,10 @@ dependencies {
     /** Retrofit and Gson dependencies **/
     implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
     implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
+
+    /** OkHttp and logging interceptor **/
+    implementation "com.squareup.okhttp3:okhttp:$okHttp_version"
+    implementation "com.squareup.okhttp3:logging-interceptor:$okHttp_version"
 
     /** Coroutines dependencies **/
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutinesAndroid_version"

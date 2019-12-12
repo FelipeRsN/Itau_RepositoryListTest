@@ -13,7 +13,7 @@ open class BaseViewModel  : ViewModel() {
 
     //Coroutine uiScope configuration
     private val viewModelJob = Job()
-    protected val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
+    protected val uiScope = CoroutineScope(Dispatchers.IO + viewModelJob)
 
     //Cancel coroutine scope to avoid memory leak
     override fun onCleared() {

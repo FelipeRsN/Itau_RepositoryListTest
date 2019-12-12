@@ -26,7 +26,6 @@ class MainApplication : Application() {
                 listOf(
                     adapterModule,
                     networkModule,
-                    serviceModule,
                     repositoryModule,
                     viewModelModule
                 )
