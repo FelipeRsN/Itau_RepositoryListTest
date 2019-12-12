@@ -1,3 +1,5 @@
 <resources>
-    <string name="app_name">Itau Repository List</string>
+    <string name="app_name" translatable="false">Itau Repository List</string>
+
+
 </resources>
