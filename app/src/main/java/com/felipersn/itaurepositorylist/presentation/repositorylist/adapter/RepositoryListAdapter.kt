@@ -15,7 +15,7 @@ class RepositoryListAdapter(private val repositoryListAdapterListener: Repositor
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val repositoryListViewHolder = RepositoryListViewHolder(parent.inflate(R.layout.list_item_repository_list))
 
-        repositoryListViewHolder.repositoryList_listItem_cardView.setOnClickListener {
+        repositoryListViewHolder.repositoryList_listItem_root.setOnClickListener {
             repositoryListAdapterListener.onRepositoryClicked()
         }
 

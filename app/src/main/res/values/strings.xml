@@ -3,4 +3,5 @@
 
     <!-- repository list screen -->
     <string name="repositoryList_title">Repository List</string>
+    <string name="repositoryList_numberOfResults">Showing %1$s results</string>
 </resources>

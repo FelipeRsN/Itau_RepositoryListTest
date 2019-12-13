@@ -3,7 +3,10 @@ package com.felipersn.itaurepositorylist.presentation.repositorylist
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.felipersn.itaurepositorylist.R
+import com.felipersn.itaurepositorylist.common.utils.EndlessScrollEventListener
+import com.felipersn.itaurepositorylist.common.utils.EndlessScrollEventListener.OnLoadMoreListener
 import com.felipersn.itaurepositorylist.common.utils.Resource
 import com.felipersn.itaurepositorylist.presentation.repositorylist.adapter.RepositoryListAdapter
 import com.felipersn.itaurepositorylist.presentation.repositorylist.adapter.RepositoryListAdapterListener
@@ -18,19 +21,22 @@ class RepositoryListActivity : AppCompatActivity(), RepositoryListAdapterListene
     private val repositoryListAdapter: RepositoryListAdapter by inject { parametersOf(this) }
     private val repositoryListViewModel: RepositoryListViewModel by viewModel()
 
+    private lateinit var endlessScrollEventListener: EndlessScrollEventListener
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_repository_list)
 
         initView()
 
+        updateNumberOfResultsLabel(0)
         repositoryListViewModel.getRepositoryList()
     }
 
     //init methods, variables and requests
     private fun initView() {
+        setupRecyclerView()
         setupListeners()
-        setupAdapters()
         setupObservers()
     }
 
@@ -38,11 +44,27 @@ class RepositoryListActivity : AppCompatActivity(), RepositoryListAdapterListene
         repositoryList_swipeRefresh?.setOnRefreshListener {
             repositoryListViewModel.getRepositoryList(true)
             repositoryListAdapter.clearList()
+            endlessScrollEventListener.reset()
+            updateNumberOfResultsLabel(0)
+        }
+
+        endlessScrollEventListener.mOnLoadMoreListener = object : OnLoadMoreListener {
+            override fun loadMore() {
+                repositoryListViewModel.getRepositoryList()
+            }
         }
     }
 
-    private fun setupAdapters() {
+    private fun setupRecyclerView() {
+        endlessScrollEventListener = EndlessScrollEventListener((repositoryList_recyclerView.layoutManager as LinearLayoutManager))
+
         repositoryList_recyclerView?.adapter = repositoryListAdapter
+        repositoryList_recyclerView?.addOnScrollListener(endlessScrollEventListener)
+    }
+
+    private fun updateNumberOfResultsLabel(results: Int) {
+        repositoryList_listStatus?.text =
+            String.format(getString(R.string.repositoryList_numberOfResults), results)
     }
 
     private fun setupObservers() {
@@ -51,14 +73,18 @@ class RepositoryListActivity : AppCompatActivity(), RepositoryListAdapterListene
                 when (resource.status) {
                     Resource.Status.SUCCESS -> {
                         toggleSwipeRefresh(false)
+                        endlessScrollEventListener.isLoading = false
                         val response = resource.data
                         repositoryListAdapter.addList(response?.items!!)
+                        updateNumberOfResultsLabel(repositoryListAdapter.itemCount)
                     }
                     Resource.Status.LOADING -> {
                         toggleSwipeRefresh(true)
+                        endlessScrollEventListener.isLoading = true
                     }
                     Resource.Status.ERROR -> {
                         toggleSwipeRefresh(false)
+                        endlessScrollEventListener.isLoading = false
                     }
                 }
             }
