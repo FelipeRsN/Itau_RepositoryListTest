@@ -16,7 +16,7 @@ class RepositoryListAdapter(private val repositoryListAdapterListener: Repositor
         val repositoryListViewHolder = RepositoryListViewHolder(parent.inflate(R.layout.list_item_repository_list))
 
         repositoryListViewHolder.repositoryList_listItem_root.setOnClickListener {
-            repositoryListAdapterListener.onRepositoryClicked()
+            repositoryListAdapterListener.onRepositoryClicked(repositoryList[repositoryListViewHolder.adapterPosition])
         }
 
         return repositoryListViewHolder

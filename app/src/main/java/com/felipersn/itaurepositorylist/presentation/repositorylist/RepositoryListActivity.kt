@@ -8,6 +8,7 @@ import com.felipersn.itaurepositorylist.R
 import com.felipersn.itaurepositorylist.common.utils.EndlessScrollEventListener
 import com.felipersn.itaurepositorylist.common.utils.EndlessScrollEventListener.OnLoadMoreListener
 import com.felipersn.itaurepositorylist.common.utils.Resource
+import com.felipersn.itaurepositorylist.data.model.Repository
 import com.felipersn.itaurepositorylist.presentation.repositorylist.adapter.RepositoryListAdapter
 import com.felipersn.itaurepositorylist.presentation.repositorylist.adapter.RepositoryListAdapterListener
 import kotlinx.android.synthetic.main.activity_repository_list.*
@@ -63,8 +64,7 @@ class RepositoryListActivity : AppCompatActivity(), RepositoryListAdapterListene
     }
 
     private fun updateNumberOfResultsLabel(results: Int) {
-        repositoryList_listStatus?.text =
-            String.format(getString(R.string.repositoryList_numberOfResults), results)
+        repositoryList_listStatus?.text = String.format(getString(R.string.repositoryList_numberOfResults), results)
     }
 
     private fun setupObservers() {
@@ -72,11 +72,11 @@ class RepositoryListActivity : AppCompatActivity(), RepositoryListAdapterListene
             singleLiveEvent.getContentIfNotHandled()?.let { resource ->
                 when (resource.status) {
                     Resource.Status.SUCCESS -> {
-                        toggleSwipeRefresh(false)
-                        endlessScrollEventListener.isLoading = false
                         val response = resource.data
                         repositoryListAdapter.addList(response?.items!!)
                         updateNumberOfResultsLabel(repositoryListAdapter.itemCount)
+                        toggleSwipeRefresh(false)
+                        endlessScrollEventListener.isLoading = false
                     }
                     Resource.Status.LOADING -> {
                         toggleSwipeRefresh(true)
@@ -92,7 +92,7 @@ class RepositoryListActivity : AppCompatActivity(), RepositoryListAdapterListene
 
     }
 
-    override fun onRepositoryClicked() {
+    override fun onRepositoryClicked(repository: Repository) {
 
     }
 
