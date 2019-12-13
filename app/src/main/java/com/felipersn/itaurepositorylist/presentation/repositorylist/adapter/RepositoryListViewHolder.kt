@@ -17,5 +17,4 @@ class RepositoryListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemVie
     val repositoryList_listItem_repositoryForks by lazy { itemView.findViewById<TextView>(R.id.repositoryList_listItem_repositoryForks) }
     val repositoryList_listItem_repositoryOwnerPicture by lazy { itemView.findViewById<CircleImageView>(R.id.repositoryList_listItem_repositoryOwnerPicture) }
     val repositoryList_listItem_repositoryOwnerUsername by lazy { itemView.findViewById<TextView>(R.id.repositoryList_listItem_repositoryOwnerUsername) }
-    val repositoryList_listItem_repositoryOwnerName by lazy { itemView.findViewById<TextView>(R.id.repositoryList_listItem_repositoryOwnerName) }
 }

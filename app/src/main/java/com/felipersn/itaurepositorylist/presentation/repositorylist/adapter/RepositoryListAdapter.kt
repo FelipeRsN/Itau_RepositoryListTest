@@ -4,8 +4,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.felipersn.itaurepositorylist.R
 import com.felipersn.itaurepositorylist.common.extension.addText
-import com.felipersn.itaurepositorylist.common.extension.getImageFromInternet
 import com.felipersn.itaurepositorylist.common.extension.inflate
+import com.felipersn.itaurepositorylist.common.extension.loadImageFromURL
 import com.felipersn.itaurepositorylist.data.model.Repository
 
 class RepositoryListAdapter(private val repositoryListAdapterListener: RepositoryListAdapterListener) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -50,10 +50,9 @@ class RepositoryListAdapter(private val repositoryListAdapterListener: Repositor
         repositoryListViewHolder.repositoryList_listItem_repositoryForks.addText(item.forksCount.toString())
         repositoryListViewHolder.repositoryList_listItem_repositoryStars.addText(item.stargazersCount.toString())
 
-        repositoryListViewHolder.repositoryList_listItem_repositoryOwnerName.addText(item.fullName)
         repositoryListViewHolder.repositoryList_listItem_repositoryOwnerUsername.addText(item.owner?.login)
 
-        repositoryListViewHolder.repositoryList_listItem_repositoryOwnerPicture.getImageFromInternet(item.owner?.avatarURL)
+        repositoryListViewHolder.repositoryList_listItem_repositoryOwnerPicture.loadImageFromURL(item.owner?.avatarURL)
     }
 
 }

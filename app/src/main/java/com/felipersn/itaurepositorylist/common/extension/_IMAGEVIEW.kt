@@ -7,7 +7,7 @@ import com.felipersn.itaurepositorylist.R
 /**
  * Method to get image from internet and insert to imageView using glide
  */
-fun ImageView.getImageFromInternet(url: String?) {
+fun ImageView.loadImageFromURL(url: String?) {
     url?.let {
         Glide.with(context)
             .asBitmap()
