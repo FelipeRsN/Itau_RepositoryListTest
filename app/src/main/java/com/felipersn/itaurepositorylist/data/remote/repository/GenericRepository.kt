@@ -7,4 +7,6 @@ class GenericRepository(retrofitBuilder: RetrofitBuilder) {
     var client: GenericService = retrofitBuilder.instance.create(GenericService::class.java)
 
     suspend fun getRepositoryList(page: Int) = client.getListOfRepository("language:Java", "stars", page)
+
+    suspend fun getPullRequests(ownerLogin: String, repositoryName: String) = client.getListOfRepository(ownerLogin, repositoryName)
 }

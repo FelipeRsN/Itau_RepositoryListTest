@@ -50,7 +50,7 @@
         app:layout_constraintTop_toBottomOf="@id/repositoryList_listStatus">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/repositoryList_recyclerView"
+            android:id="@+id/repositoryList_list"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:clipToPadding="false"

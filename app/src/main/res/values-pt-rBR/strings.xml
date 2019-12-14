@@ -3,4 +3,9 @@
     <!-- repository list screen -->
     <string name="repositoryList_title">Lista de repositórios</string>
     <string name="repositoryList_numberOfResults">Exibindo %1$s resultados</string>
+    <string name="repositoryList_error">Erro ao exibir os repositórios. Tente novamente.</string>
+
+    <string name="pullRequest_emptyList">Nenhum pull request encontrado</string>
+    <string name="pullRequest_pullRequestCount">%1$s abertos / %2$s fechados</string>
+    <string name="pullRequest_error">Erro ao exibir os pull requests. Tente novamente.</string>
 </resources>

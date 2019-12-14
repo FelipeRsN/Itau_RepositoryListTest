@@ -5,10 +5,12 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.felipersn.itaurepositorylist.R
+import com.felipersn.itaurepositorylist.common.extension.longToast
 import com.felipersn.itaurepositorylist.common.utils.EndlessScrollEventListener
 import com.felipersn.itaurepositorylist.common.utils.EndlessScrollEventListener.OnLoadMoreListener
 import com.felipersn.itaurepositorylist.common.utils.Resource
 import com.felipersn.itaurepositorylist.data.model.Repository
+import com.felipersn.itaurepositorylist.presentation.pullrequest.PullRequestsActivity
 import com.felipersn.itaurepositorylist.presentation.repositorylist.adapter.RepositoryListAdapter
 import com.felipersn.itaurepositorylist.presentation.repositorylist.adapter.RepositoryListAdapterListener
 import kotlinx.android.synthetic.main.activity_repository_list.*
@@ -57,10 +59,10 @@ class RepositoryListActivity : AppCompatActivity(), RepositoryListAdapterListene
     }
 
     private fun setupRecyclerView() {
-        endlessScrollEventListener = EndlessScrollEventListener((repositoryList_recyclerView.layoutManager as LinearLayoutManager))
+        endlessScrollEventListener = EndlessScrollEventListener((repositoryList_list.layoutManager as LinearLayoutManager))
 
-        repositoryList_recyclerView?.adapter = repositoryListAdapter
-        repositoryList_recyclerView?.addOnScrollListener(endlessScrollEventListener)
+        repositoryList_list?.adapter = repositoryListAdapter
+        repositoryList_list?.addOnScrollListener(endlessScrollEventListener)
     }
 
     private fun updateNumberOfResultsLabel(results: Int) {
@@ -85,6 +87,7 @@ class RepositoryListActivity : AppCompatActivity(), RepositoryListAdapterListene
                     Resource.Status.ERROR -> {
                         toggleSwipeRefresh(false)
                         endlessScrollEventListener.isLoading = false
+                        longToast(getString(R.string.repositoryList_error))
                     }
                 }
             }
@@ -93,7 +96,7 @@ class RepositoryListActivity : AppCompatActivity(), RepositoryListAdapterListene
     }
 
     override fun onRepositoryClicked(repository: Repository) {
-
+        startActivity(PullRequestsActivity.providePullRequestIntent(this, repository.name, repository.owner?.login))
     }
 
     private fun toggleSwipeRefresh(show: Boolean) {

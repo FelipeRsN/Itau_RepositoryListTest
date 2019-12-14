@@ -8,8 +8,7 @@
     android:layout_marginBottom="8dp"
     android:paddingStart="16dp"
     android:paddingTop="10dp"
-    android:paddingEnd="16dp"
-    app:cardBackgroundColor="@android:color/white">
+    android:paddingEnd="16dp">
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/repositoryList_listItem_repositoryName"

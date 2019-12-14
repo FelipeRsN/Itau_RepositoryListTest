@@ -4,4 +4,9 @@
     <!-- repository list screen -->
     <string name="repositoryList_title">Repository List</string>
     <string name="repositoryList_numberOfResults">Showing %1$s results</string>
+    <string name="repositoryList_error">Error trying to get repositories. try again.</string>
+
+    <string name="pullRequest_emptyList">No pull request found</string>
+    <string name="pullRequest_pullRequestCount">%1$s opened / %2$s closed</string>
+    <string name="pullRequest_error">Error trying to get pull requests. Try again.</string>
 </resources>
